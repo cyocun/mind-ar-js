@@ -1,9 +1,9 @@
-import { Matrix4, Vector3, Quaternion, Scene, WebGLRenderer, PerspectiveCamera, Group, sRGBEncoding } from "three";
+import { Matrix4, Vector3, Quaternion, Scene, WebGLRenderer, PerspectiveCamera, Group, sRGBEncoding } from 'three';
 import * as tf from '@tensorflow/tfjs';
 //import { CSS3DRenderer } from '../libs/CSS3DRenderer.js';
-import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer.js'
-import { Controller } from "./controller.js";
-import { UI } from "../ui/ui.js";
+import { CSS3DRenderer } from 'three/addons/renderers/CSS3DRenderer.js';
+import { Controller } from './controller.js';
+import { UI } from '../ui/ui.js';
 
 const cssScaleDownMatrix = new Matrix4();
 cssScaleDownMatrix.compose(new Vector3(), new Quaternion(), new Vector3(0.001, 0.001, 0.001));
@@ -12,7 +12,7 @@ const invisibleMatrix = new Matrix4().set(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 export class MindARThree {
 	constructor({
-    container, imageTargetSrc, maxTrack, uiLoading = "yes", uiScanning = "yes", uiError = "yes",
+								container, imageTargetSrc, maxTrack, uiLoading = 'yes', uiScanning = 'yes', uiError = 'yes',
 								filterMinCF = null, filterBeta = null, warmupTolerance = null, missTolerance = null,
 								userDeviceId = null, environmentDeviceId = null
 							}) {
@@ -85,7 +85,15 @@ export class MindARThree {
 		const group = new Group();
 		group.visible = false;
 		group.matrixAutoUpdate = false;
-    const anchor = { group, targetIndex, onTargetFound: null, onTargetLost: null, onTargetUpdate: null, css: false, visible: false };
+		const anchor = {
+			group,
+			targetIndex,
+			onTargetFound: null,
+			onTargetLost: null,
+			onTargetUpdate: null,
+			css: false,
+			visible: false
+		};
 		this.anchors.push(anchor);
 		this.scene.add(group);
 		return anchor;
@@ -95,11 +103,20 @@ export class MindARThree {
 		const group = new Group();
 		group.visible = false;
 		group.matrixAutoUpdate = false;
-    const anchor = { group, targetIndex, onTargetFound: null, onTargetLost: null, onTargetUpdate: null, css: true, visible: false };
+		const anchor = {
+			group,
+			targetIndex,
+			onTargetFound: null,
+			onTargetLost: null,
+			onTargetUpdate: null,
+			css: true,
+			visible: false
+		};
 		this.anchors.push(anchor);
 		this.cssScene.add(group);
 		return anchor;
 	}
+
 
 	_startVideo() {
 		return new Promise((resolve, reject) => {
@@ -108,10 +125,10 @@ export class MindARThree {
 			this.video.setAttribute('autoplay', '');
 			this.video.setAttribute('muted', '');
 			this.video.setAttribute('playsinline', '');
-      this.video.style.position = 'absolute'
-      this.video.style.top = '0px'
-      this.video.style.left = '0px'
-      this.video.style.zIndex = '-2'
+			this.video.style.position = 'absolute';
+			this.video.style.top = '0px';
+			this.video.style.left = '0px';
+			this.video.style.zIndex = '-2';
 			this.container.appendChild(this.video);
 
 			if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -146,7 +163,7 @@ export class MindARThree {
 				});
 				this.video.srcObject = stream;
 			}).catch((err) => {
-        console.log("getUserMedia error", err);
+				console.log('getUserMedia error', err);
 				reject();
 			});
 		});
@@ -173,7 +190,7 @@ export class MindARThree {
 							if (this.anchors[i].targetIndex === targetIndex) {
 								if (this.anchors[i].css) {
 									this.anchors[i].group.children.forEach((obj) => {
-                    obj.element.style.visibility = worldMatrix === null ? "hidden" : "visible";
+										obj.element.style.visibility = worldMatrix === null ? 'hidden' : 'visible';
 									});
 								} else {
 									this.anchors[i].group.visible = worldMatrix !== null;
@@ -304,10 +321,10 @@ export class MindARThree {
 		camera.aspect = container.clientWidth / container.clientHeight;
 		camera.updateProjectionMatrix();
 
-    video.style.top = (-(vh - container.clientHeight) / 2) + "px";
-    video.style.left = (-(vw - container.clientWidth) / 2) + "px";
-    video.style.width = vw + "px";
-    video.style.height = vh + "px";
+		video.style.top = (-(vh - container.clientHeight) / 2) + 'px';
+		video.style.left = (-(vw - container.clientWidth) / 2) + 'px';
+		video.style.width = vw + 'px';
+		video.style.height = vh + 'px';
 
 		const canvas = renderer.domElement;
 		const cssCanvas = cssRenderer.domElement;
