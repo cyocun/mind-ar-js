@@ -1,6 +1,6 @@
 import { Scene as m, WebGLRenderer as g, sRGBEncoding as y, PerspectiveCamera as w, Mesh as M, MeshStandardMaterial as b, Group as p, BufferGeometry as x, BufferAttribute as A } from "three";
 import { CSS3DRenderer as E } from "three/addons/renderers/CSS3DRenderer.js";
-import { C as R } from "./controller-CscszkWd.js";
+import { C as R } from "./controller-DeThRbZw.js";
 import { U as S } from "./ui-D7R2QPpe.js";
 const I = { BufferGeometry: x, BufferAttribute: A };
 class C {
